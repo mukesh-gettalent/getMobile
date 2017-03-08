@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title style="text-align: center;">
+      Login
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+   
+    <!--<img src="assets/image/logo.png" class="img_alignno_backcolor"/>-->
+      <img src="assets/image/angular.png" class="img_aligns"/>
+  <span><p class="text_centered"><b>Get Talent</b> </p></span>
+
+   
+  <form (ngSubmit)="logForm()">
+    <ion-item>
+    <ion-label floating>
+<ion-icon name="mail"></ion-icon>
+        Email</ion-label>
+     
+   <ion-input type="text" [(ngModel)]="todo.email" name="email"
+   required minlength="3"
+   ></ion-input>
+  
+</ion-item>
+
+        <ion-item>
+        <ion-label  floating>
+             <ion-icon ios="ios-key" md="md-key"></ion-icon>
+            Password</ion-label>
+        <ion-input type="password" [(ngModel)]="todo.password" name="password"></ion-input>
+      </ion-item>
+
+      <ion-item class="padding">
+    <ion-label>Remember Me</ion-label>
+    <ion-checkbox ></ion-checkbox>
+  </ion-item>
+
+      <button ion-button type="submit" block>Login</button>
+      <div class="col s12">
+          <div class="col s6">
+      <a style="text-align: center; float: right; color: deeppink;" (click)="Goforgotpage()"><b>Forgot Password?</b></a>
+      <a style="text-align: center; color: deeppink;" (click)="regPage()" block><b>Register</b></a>
+          </div>
+          <div class="col s6">
+      
+          </div>
+      </div>
+     
+    </form>
+</ion-content>
