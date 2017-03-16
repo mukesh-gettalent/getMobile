@@ -1,0 +1,169 @@
+<!--
+  Generated template for the Register page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+<ion-navbar>
+    <ion-title>Registration</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+<form [formGroup]="authForm" (ngSubmit)="submitForm(authForm.value)">
+   <img src="assets/image/angular.png" class="img_aligns"/>
+  <span><p class="text_centered"><b>Get Talent</b> </p></span>
+        <ion-item>
+            <ion-label floating>Username</ion-label>
+            <ion-input type="text" value="" [formControl]="authForm.controls['username']" [ngClass]="{'error-border':!authForm.controls['username'].valid}"></ion-input>         
+        </ion-item><br/>
+        <div class="error-box" *ngIf="authForm.controls['username'].hasError('required') && authForm.controls['username'].touched">* Username is required!</div>
+        <div class="error-box" *ngIf="authForm.controls['username'].hasError('minlength') && authForm.controls['username'].touched">* Minimum username length is 5!</div>
+		<div class="error-box" *ngIf="authForm.controls['username'].hasError('maxlength') && authForm.controls['username'].touched">* Maximum username length is 10!</div>
+        
+        <!-- Email -->
+        <ion-item>
+            <ion-label floating>Email</ion-label>
+            <ion-input type="email" value="" [formControl]="authForm.controls['email']" [ngClass]="{'error-border':!authForm.controls['email'].valid}"></ion-input>         
+        </ion-item><br/>
+        <div class="error-box" *ngIf="authForm.controls['email'].hasError('required') && authForm.controls['email'].touched">* Email is required!</div>
+        <div class="error-box" *ngIf="authForm.controls['email'].hasError('minlength') && authForm.controls['email'].touched">* Minimum Email length is 5!</div>
+		<div class="error-box" *ngIf="authForm.controls['email'].hasError('maxlength') && authForm.controls['email'].touched">* Maximum Email length is 50!</div>
+       
+        <!-- password -->
+        <ion-item>
+            <ion-label floating>Password</ion-label>
+            <ion-input type="password" value="" [formControl]="authForm.controls['password']"  ></ion-input>
+        </ion-item><br/>
+        <div class="error-box" *ngIf="authForm.controls['password'].hasError('required') && authForm.controls['password'].touched">* Password is required!</div>
+        <div class="error-box" *ngIf="authForm.controls['password'].hasError('minlength') && authForm.controls['password'].touched">* Minimum Password length is 8!</div>
+        <!--<div class="error-box" *ngIf="authForm.hasError('passwordPattern')">* Password required!</div>-->
+		<br/>
+<!-- Confirm Password -->
+<ion-item>
+            <ion-label floating>Confirm Password</ion-label>
+            <ion-input type="password" value="" [formControl]="authForm.controls['confirm_password']"  ></ion-input>
+        </ion-item><br/>
+        <div class="error-box" *ngIf="authForm.controls['confirm_password'].hasError('required') && authForm.controls['confirm_password'].touched">* Confirm Password is required!</div>
+        <div class="error-box" *ngIf="authForm.controls['confirm_password'].hasError('minlength') && authForm.controls['confirm_password'].touched">* Minimum Confirm Password length is 8!</div>
+        <div class="error-box" *ngIf="authForm.hasError('mismatchedPasswords') && authForm.controls['confirm_password'].touched">*Passwords do not match</div>
+        <!--<div class="error-box" *ngIf="authForm.hasError('mismatchedPasswords')">Passwords do not match.</div>-->
+        <br/>
+<!-- Mobile Number -->
+<ion-item>
+            <ion-label floating>Mobile Number</ion-label>
+            <ion-input type="number" value="" [formControl]="authForm.controls['mob_no']" [ngClass]="{'error-border':!authForm.controls['mob_no'].valid}"></ion-input>         
+        </ion-item><br/>
+        <div class="error-box" *ngIf="authForm.controls['mob_no'].hasError('required') && authForm.controls['mob_no'].touched">* Mobile number is required!</div>
+        <div class="error-box" *ngIf="authForm.controls['mob_no'].hasError('minlength') && authForm.controls['mob_no'].touched">* Minimum Mobile number length is 10!</div>
+		<div class="error-box" *ngIf="authForm.controls['mob_no'].hasError('maxlength') && authForm.controls['mob_no'].touched">* Maximum username length is 10!</div>
+<!-- Select Role -->
+  <ion-list>
+			<ion-item>
+				<ion-label>Select Role</ion-label>
+				<ion-select [formControl]="authForm.controls['select_role']" [(ngModel)]="selectRole"  (ionChange)="onSelectedRole($event, selectRole)">
+          <ion-option *ngFor="let roleslected of roleSelect" value="{{ roleslected.name }}">{{ roleslected.value }}</ion-option> 
+				</ion-select>
+			</ion-item>
+		</ion-list><br/>
+<!-- Selec Role Options based on User Select -->
+<div *ngIf="selectRole">
+  <!-- Client Part -->
+  <div *ngIf="currentRolename=='client'" padding>
+    <img src="assets/image/company.png" class="img_align"/>
+    <h5 class="text_centered" >Client Details</h5>
+    <!-- Company Name -->
+    <ion-item>
+            <ion-label floating>Company Name</ion-label>
+            <ion-input type="text" value="" [formControl]="authForm.controls['company_name']" [ngClass]="{'error-border':!authForm.controls['company_name'].valid}"></ion-input>         
+        </ion-item><br/>
+        <div class="error-box" *ngIf="authForm.controls['company_name'].hasError('required') && authForm.controls['company_name'].touched">* Company Name is required!</div>
+        <div class="error-box" *ngIf="authForm.controls['company_name'].hasError('minlength') && authForm.controls['company_name'].touched">* Minimum Company name length is 5!</div>
+		<div class="error-box" *ngIf="authForm.controls['company_name'].hasError('maxlength') && authForm.controls['company_name'].touched">* Maximum Company Name length is 10!</div>
+   <!-- Company Website -->
+    <ion-item>
+            <ion-label floating>Company Website</ion-label>
+            <ion-input type="text" value="" [formControl]="authForm.controls['company_web']" [ngClass]="{'error-border':!authForm.controls['company_web'].valid}"></ion-input>         
+        </ion-item><br/>
+        <div class="error-box" *ngIf="authForm.controls['company_web'].hasError('required') && authForm.controls['company_web'].touched">* company Website is required!</div>
+        <div class="error-box" *ngIf="authForm.controls['company_web'].hasError('minlength') && authForm.controls['company_web'].touched">* Minimum Company Website length is 5!</div>
+		<div class="error-box" *ngIf="authForm.controls['company_web'].hasError('maxlength') && authForm.controls['company_web'].touched">* Maximum Company Website length is 10!</div>
+ <!-- Primary Contact -->
+  <ion-list>
+			<ion-item>
+				<ion-label>Primary Contact</ion-label>
+				<ion-select [formControl]="authForm.controls['primary_cont']"  [(ngModel)]="primary_cont">
+          <ion-option *ngFor="let selectcountcompany of countcompany" value="{{selectcountcompany}}">{{ selectcountcompany }}</ion-option>
+				</ion-select>
+			</ion-item>
+		</ion-list>
+  <!-- Pan card Number -->
+ <ion-item>
+            <ion-label floating>Pancard Number</ion-label>
+            <ion-input type="text" text-uppercase value="" [formControl]="authForm.controls['pan_no']" [ngClass]="{'error-border':!authForm.controls['pan_no'].valid}"></ion-input>         
+        </ion-item><br/>
+        <div class="error-box" *ngIf="authForm.controls['pan_no'].hasError('required') && authForm.controls['pan_no'].touched">* Pan card Number is required!</div>
+        <div class="error-box" *ngIf="authForm.controls['pan_no'].hasError('minlength') && authForm.controls['pan_no'].touched">* Minimum Pan card NUmber length is 10!</div>
+		<div class="error-box" *ngIf="authForm.controls['pan_no'].hasError('maxlength') && authForm.controls['pan_no'].touched">* Maximum Pan card Number length is 10!</div>
+ <!-- TIN Number -->
+ <ion-item>
+            <ion-label floating>TIN Number</ion-label>
+            <ion-input type="number" text-uppercase value="" [formControl]="authForm.controls['tin_no']" [ngClass]="{'error-border':!authForm.controls['tin_no'].valid}"></ion-input>         
+        </ion-item><br/>
+        <div class="error-box" *ngIf="authForm.controls['tin_no'].hasError('required') && authForm.controls['tin_no'].touched">* TIN Number equired!</div>
+        <div class="error-box" *ngIf="authForm.controls['tin_no'].hasError('minlength') && authForm.controls['tin_no'].touched">* Minimum TIN Number length is 11!</div>
+		<div class="error-box" *ngIf="authForm.controls['tin_no'].hasError('maxlength') && authForm.controls['tin_no'].touched">* Maximum TIN Numberlength is 11!</div>  
+     <!-- GST Number -->
+ <ion-item>
+            <ion-label floating>GST Number</ion-label>
+            <ion-input type="number" text-uppercase value="" [formControl]="authForm.controls['gst_no']" [ngClass]="{'error-border':!authForm.controls['gst_no'].valid}"></ion-input>         
+        </ion-item><br/>
+        <div class="error-box" *ngIf="authForm.controls['gst_no'].hasError('required') && authForm.controls['gst_no'].touched">* GST Number is required!</div>
+        <div class="error-box" *ngIf="authForm.controls['gst_no'].hasError('minlength') && authForm.controls['gst_no'].touched">* Minimum GST Number length is 15!</div>
+		<div class="error-box" *ngIf="authForm.controls['gst_no'].hasError('maxlength') && authForm.controls['gst_no'].touched">* Maximum GSTN Number length is 15!</div>  
+  </div>
+  <!-- End of Client Part -->
+<!-- Parent Part -->
+<div *ngIf="currentRolename=='partner'" padding>
+  <img src="assets/image/partner.png" class="img_align" />
+  <h5 class="text_centered" padding> Partner Details</h5>
+  </div>
+<!-- End Parent Part -->
+</div>
+<!-- Country Select -->
+    <ion-list>
+			<ion-item>
+				<ion-label>Country</ion-label>
+				<ion-select [formControl]="authForm.controls['country']"  [(ngModel)]="countryname">
+          <ion-option selected="true" value="">Select Country</ion-option>
+          <ion-option *ngFor="let selectedcountryname of countryselect" value="{{selectedcountryname.countryname}}">
+            {{selectedcountryname.countryname}}
+        </ion-option>
+				</ion-select>
+			</ion-item>
+		</ion-list>
+    <!-- State Select -->
+    <ion-list>
+			<ion-item>
+				<ion-label>State</ion-label>
+				<ion-select [formControl]="authForm.controls['state']" [(ngModel)]="statename">
+          <ion-option selected="true" value="">Select State</ion-option>
+          <ion-option *ngFor="let sltste of stateselect" value="{{sltste.statename}}">{{ sltste.statename }}</ion-option>
+				</ion-select>
+			</ion-item>
+		</ion-list>
+<!-- City Select -->
+    <ion-list>
+			<ion-item>
+				<ion-label>City</ion-label>
+				<ion-select [formControl]="authForm.controls['city']"  [(ngModel)]="cityname">
+          <ion-option selected="true" value="">Select City</ion-option>
+          <ion-option *ngFor="let sltcty of selectcity" value="{{sltcty.cityname}}">{{ sltcty.cityname }}</ion-option>
+				</ion-select>
+			</ion-item>
+		</ion-list>
+    <br/>
+		<button type="submit" ion-button full [disabled]="!authForm.valid" >Submit</button>
+    <!--[disabled]="!authForm.valid">Submit</button>-->
+    </form>
+</ion-content>

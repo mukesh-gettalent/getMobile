@@ -1,38 +1,39 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-
 import { BrowserModule } from '@angular/platform-browser';
-// import { FormsModule } from '@angular/forms';
 import { HomePage } from '../pages/home/home';
-import { RegistrationPage } from '../pages/registration/registration';
 import { ForgotPage } from '../pages/forgot/forgot';
-// import { EmailValidator } from '../pages/validators/email';
-// import { EmailValidator } from '../pages/forgot/email';
-// import { PasswordValidator } from '../pages/validators/password';
-// import { PasswordValidator } from '../pages/forgot/password'
+import { RegisterPage } from '../pages/register/register';
+import { TranslateModule , TranslateLoader ,TranslateStaticLoader} from 'ng2-translate/ng2-translate';  
+import { Http } from '@angular/http';
+
+export function createTranslateLoader(http: Http) {
+    return new TranslateStaticLoader(http, 'assets/i18n', '.json');
+}
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    RegistrationPage,
-    ForgotPage
-    // EmailValidator,
-    // PasswordValidator
+    ForgotPage,
+    RegisterPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
+    TranslateModule.forRoot({
+      provide: TranslateLoader,
+      useFactory: (createTranslateLoader),
+      deps: [Http]
+    }),
     BrowserModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    RegistrationPage,
-    ForgotPage
-    // EmailValidator,
-    // PasswordValidator
+    ForgotPage,
+    RegisterPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

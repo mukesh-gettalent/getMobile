@@ -1,52 +1,60 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title style="text-align: center;">
-      Login
-    </ion-title>
-  </ion-navbar>
-</ion-header>
+
 
 <ion-content padding>
-   
-    <!--<img src="assets/image/logo.png" class="img_alignno_backcolor"/>-->
-      <img src="assets/image/angular.png" class="img_aligns"/>
-  <span><p class="text_centered"><b>Get Talent</b> </p></span>
+    <div style="float: right;">
+      <label>
+          <select #langSelect (change)="translate.use(langSelect.value)">
+            <option *ngFor="let lang of translate.getLangs()" [value]="lang"
+            [selected]="lang === translate.currentLang">{{ lang }}</option>
+          </select>
+        </label>
+    </div>
+   <!--<img src="assets/image/logo.png" class="img_alignno_backcolor"/>-->
 
-   
-  <form (ngSubmit)="logForm()">
-    <ion-item>
-    <ion-label floating>
-<ion-icon name="mail"></ion-icon>
-        Email</ion-label>
-     
-   <ion-input type="text" [(ngModel)]="todo.email" name="email"
-   required minlength="3"
-   ></ion-input>
+   <div class="mainLogo"><img src="assets/image/getTalent.png" alt="GetTalent" height=" " width=" "/></div>
   
-</ion-item>
+    <form [formGroup]="authForm" (ngSubmit)="submitForm(authForm.value)">
 
-        <ion-item>
-        <ion-label  floating>
-             <ion-icon ios="ios-key" md="md-key"></ion-icon>
-            Password</ion-label>
-        <ion-input type="password" [(ngModel)]="todo.password" name="password"></ion-input>
-      </ion-item>
+        <div class="gorupInputs">
+          <ion-item>
+              <ion-label floating>Email</ion-label>
+              <ion-input type="email"  value="" [formControl]="authForm.controls['email']" [ngClass]="{'error-border':!authForm.controls['email'].valid}"
+              required
+              ></ion-input>         
+          </ion-item>
 
-      <ion-item class="padding">
-    <ion-label>Remember Me</ion-label>
-    <ion-checkbox ></ion-checkbox>
-  </ion-item>
+          <div class="error-box" *ngIf="authForm.controls['email'].hasError('required') && authForm.controls['email'].touched">* Email is required!</div>
+          <div class="error-box" *ngIf="authForm.controls['email'].hasError('minlength') && authForm.controls['email'].touched">* Minimum Email length is 5!</div>
+          <div class="error-box" *ngIf="authForm.controls['email'].hasError('maxlength') && authForm.controls['email'].touched">* Maximum email length is 20!</div>
+          
+          <ion-item class="noBorderBtm">
+              <ion-label floating>Password</ion-label>
+              <ion-input type="password" value="" [formControl]="authForm.controls['password']" ></ion-input>
+          </ion-item>
 
-      <button ion-button type="submit" block>Login</button>
-      <div class="col s12">
-          <div class="col s6">
-      <a style="text-align: center; float: right; color: deeppink;" (click)="Goforgotpage()"><b>Forgot Password?</b></a>
-      <a style="text-align: center; color: deeppink;" (click)="regPage()" block><b>Register</b></a>
-          </div>
-          <div class="col s6">
+        </div>
+            <!--<div class="error-box" *ngIf="authForm.controls['password'].hasError('required') && authForm.controls['password'].touched">* Password is required!</div>
+            <div class="error-box" *ngIf="authForm.controls['password'].hasError('minlength') && authForm.controls['password'].touched">* Minimum Password length is 8!</div>
+        <div class="error-box" *ngIf="authForm.controls['password'].hasError('checkFirstCharacterValidatorOutput') && authForm.controls['password'].touched">* Password cant't start with number!</div><br/>-->
       
-          </div>
-      </div>
-     
+          <ion-item>
+            <ion-toggle checked="false"></ion-toggle>
+            <ion-label>Remember Me</ion-label>
+          </ion-item>
+
+          <div class="btnGroup">
+            <button type="submit" ion-button >Login</button>
+            <a (click)="gonewRegister()" >Don’t have an account?</a> <span class="spacer">|</span>
+            <a (click)="Goforgotpage()">Forgot Password?</a>
+        </div>
+
+        <div class="socialBtns">
+            <button type="submit" class="facebookBtn" ><ion-icon name="logo-facebook"></ion-icon>
+            Sign in with Facebook</button>
+            <button type="submit" class="twitterBtn" ><ion-icon name="logo-twitter"></ion-icon>Sign in with Twitter</button>
+        </div>
+
     </form>
+       
+          <!--<a (click)="gonewRegister()"> New Register</a>-->
 </ion-content>
